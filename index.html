@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Service &amp; Dienstleistungen Graf — Gartenpflege &amp; Hausmeisterservice im Sauerland</title>
+  <meta name="description" content="Gartenpflege, Freischnitt & Hausmeisterservice rund um Eslohe. Kostenlose Einschätzung vor Ort, eigenes Gerät, fester Ansprechpartner. Jetzt anrufen: 0151 29870523." />
+  <link rel="icon" href="images/logo.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ══════════════════════════════════════════════════════════
+       DESIGN — Entwurf 3 „Höhenlinien"
+       Warmes Papier + Waldtinte, Moosgrün + Holz-Ocker.
+       Signature: topografische Konturlinien (Gelände/Grundstück).
+       Schriften: Fraunces (Serife, warm/kräftig) + Work Sans.
+    ══════════════════════════════════════════════════════════ */
+    :root {
+      --paper:    #eee9dd;   /* warmes, leicht grünliches Papier   */
+      --paper-2:  #e4ddcb;   /* etwas tiefere Papierfläche         */
+      --card:     #fbf9f3;   /* helle Karten                       */
+      --ink:      #1b241c;   /* Waldtinte, fast schwarz            */
+      --ink-soft: #4b5546;   /* Fließtext                          */
+      --mute:     #8a9080;   /* Nebentext                          */
+      --moss:     #4a5d3a;   /* Hauptakzent Moosgrün               */
+      --moss-2:   #3a4a2d;   /* dunkles Moos                       */
+      --clay:     #b3703a;   /* warmes Holz-Ocker (Sekundär)       */
+      --sage:     #8a9b7a;   /* Konturlinien / feine Linien        */
+      --line:     #d5cdba;   /* Haarlinien auf Papier              */
+      --focus:    #2f5d46;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    body {
+      font-family: 'Work Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { -webkit-appearance: none; appearance: none; font-family: inherit; color: inherit; cursor: pointer; }
+
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
+
+    h1, h2, h3, .serif {
+      font-family: 'Fraunces', serif;
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      text-wrap: balance;
+    }
+
+    /* Eyebrow / Overline */
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: 'Work Sans', sans-serif;
+      font-size: 0.76rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--moss);
+    }
+    .eyebrow::before { content: ''; width: 1.8rem; height: 2px; background: var(--clay); }
+
+    /* Scroll-Reveal */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-weight: 600; font-size: 0.95rem;
+      padding: 0.95rem 1.5rem; border-radius: 999px;
+      border: 2px solid transparent;
+      transition: transform .12s ease, background .25s, color .25s, border-color .25s;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn svg { width: 17px; height: 17px; fill: currentColor; flex: none; }
+    .btn-moss { background: var(--moss); color: #f4f1e6; }
+    .btn-moss:hover { background: var(--moss-2); }
+    .btn-clay { background: var(--clay); color: #fff; }
+    .btn-clay:hover { background: #9a5f2f; }
+    .btn-outline { border-color: var(--ink); color: var(--ink); }
+    .btn-outline:hover { background: var(--ink); color: var(--paper); }
+    .btn-ghost { border-color: rgba(255,255,255,.55); color: #fff; background: rgba(255,255,255,.08); backdrop-filter: blur(4px); }
+    .btn-ghost:hover { background: #fff; color: var(--moss-2); border-color: #fff; }
+
+    /* Konturlinien-Signature (dekorativ) */
+    .contours { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+    .contours path { fill: none; stroke: var(--sage); stroke-width: 1.5; opacity: .5; }
+
+    /* ══════════ HEADER ══════════ */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; height: 70px;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+      transition: background .35s ease, box-shadow .35s ease;
+    }
+    header.scrolled { background: rgba(238,233,221,.95); backdrop-filter: blur(8px); box-shadow: 0 1px 0 var(--line); }
+    .brand { display: flex; align-items: center; gap: .65rem; flex: none; }
+    .brand img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,.8); background:#fff; flex: none; }
+    header.scrolled .brand img { border-color: var(--moss); }
+    .brand b {
+      font-family: 'Fraunces', serif; font-weight: 600; font-size: .82rem;
+      color: #fff; line-height: 1.2; letter-spacing: .01em; white-space: nowrap;
+    }
+    header.scrolled .brand b { color: var(--ink); }
+    nav.main { display: flex; align-items: center; gap: clamp(1.1rem, 2.2vw, 2rem); }
+    nav.main a { font-size: .82rem; font-weight: 600; letter-spacing: .03em; color: rgba(255,255,255,.9); white-space: nowrap; }
+    header.scrolled nav.main a { color: var(--ink-soft); }
+    nav.main a:hover { color: #fff; }
+    header.scrolled nav.main a:hover { color: var(--moss); }
+    .nav-call {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--clay); color: #fff !important; font-weight: 600; font-size: .82rem;
+      padding: .55rem 1.05rem; border-radius: 999px; white-space: nowrap;
+    }
+    .nav-call:hover { background: #9a5f2f; }
+    .nav-call svg { width: 14px; height: 14px; fill: #fff; }
+    @media (max-width: 640px) { .nav-call { display: none; } }
+    @media (max-width: 1080px) { nav.main a.navlink { display: none; } }
+
+    /* ══════════ HERO ══════════ */
+    .hero { position: relative; min-height: 94vh; display: flex; align-items: center; overflow: hidden; background: var(--ink); }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('images/galerie-freischnitt.jpg') center 45% / cover no-repeat;
+    }
+    .hero::after {
+      content: ''; position: absolute; inset: 0;
+      background:
+        linear-gradient(100deg, rgba(20,28,22,.82) 0%, rgba(20,28,22,.5) 45%, rgba(20,28,22,.1) 78%, rgba(20,28,22,0) 100%),
+        linear-gradient(180deg, rgba(20,28,22,.25) 0%, rgba(20,28,22,0) 30%, rgba(20,28,22,.35) 100%);
+    }
+    .hero .wrap { position: relative; z-index: 2; width: 100%; padding-top: 70px; padding-bottom: clamp(5rem, 12vh, 9rem); }
+    .hero-inner { max-width: 44rem; }
+    .hero .eyebrow { color: #cdd8bf; }
+    .hero .eyebrow::before { background: var(--clay); }
+    .hero h1 { margin-top: 1.1rem; font-size: clamp(2.7rem, 7vw, 5.2rem); color: #fdfbf4; text-shadow: 0 2px 30px rgba(0,0,0,.35); }
+    .hero h1 .hl { color: #d9e3c6; font-style: italic; }
+    .hero-lead { margin-top: 1.4rem; max-width: 34rem; font-size: clamp(1.05rem, 1.4vw, 1.2rem); color: rgba(255,255,255,.92); text-shadow: 0 1px 12px rgba(0,0,0,.4); }
+    .hero-lead b { color: #fff; font-weight: 600; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
+
+    /* „Kachel", die von unten ins Foto ragt (Trust-Streifen) */
+    .trust-tile {
+      position: relative; z-index: 3; margin-top: -3.5rem;
+      background: var(--card);
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 -12px 40px rgba(20,28,22,.18);
+    }
+    .trust-tile .wrap { padding-top: clamp(1.6rem, 3vw, 2.2rem); padding-bottom: clamp(1.6rem, 3vw, 2.2rem); }
+    .trust-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1rem, 3vw, 2rem); }
+    @media (max-width: 760px) { .trust-row { grid-template-columns: repeat(2, 1fr); gap: 1.2rem; } }
+    .trust-item { display: flex; gap: .7rem; align-items: flex-start; }
+    .trust-item svg { width: 26px; height: 26px; flex: none; fill: none; stroke: var(--moss); stroke-width: 1.8; }
+    .trust-item b { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1rem; display: block; }
+    .trust-item span { font-size: .84rem; color: var(--ink-soft); }
+
+    /* ══════════ SECTION-GERÜST ══════════ */
+    section { padding: clamp(4rem, 9vw, 7rem) 0; position: relative; }
+    .sec-head { max-width: 42rem; margin-bottom: clamp(2.2rem, 5vw, 3.4rem); }
+    .sec-head h2 { margin-top: 1rem; font-size: clamp(2rem, 4.6vw, 3.2rem); }
+    .sec-head p { margin-top: 1rem; color: var(--ink-soft); font-size: 1.05rem; }
+
+    /* ══════════ LEISTUNGEN — Foto-Karten ══════════ */
+    .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2.2vw, 1.6rem); }
+    @media (max-width: 900px) { .svc-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .svc-grid { grid-template-columns: 1fr; } }
+    .svc {
+      background: var(--card); border-radius: 16px; overflow: hidden;
+      border: 1px solid var(--line); display: flex; flex-direction: column;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .svc:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(20,28,22,.12); }
+    .svc-img { aspect-ratio: 3/2; overflow: hidden; }
+    .svc-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+    .svc:hover .svc-img img { transform: scale(1.05); }
+    .svc-body { padding: 1.2rem 1.3rem 1.4rem; }
+    .svc-body h3 { font-size: 1.25rem; }
+    .svc-body p { margin-top: .5rem; font-size: .92rem; color: var(--ink-soft); }
+
+    /* ══════════ VORHER / NACHHER ══════════ */
+    .band-ink { background: var(--ink); color: #f0f1ea; }
+    .band-ink .sec-head p { color: #b7bfae; }
+    .band-ink .eyebrow { color: #cdd8bf; }
+    .ba-grid { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,6fr); gap: clamp(2rem,5vw,4rem); align-items: center; }
+    @media (max-width: 860px) { .ba-grid { grid-template-columns: 1fr; } }
+    .ba-tabs { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 1.6rem; }
+    .ba-tab {
+      font-size: .82rem; font-weight: 600; letter-spacing: .03em;
+      color: #c3cbb8; background: transparent; border: 1.5px solid #47513f;
+      padding: .5rem 1rem; border-radius: 999px; transition: all .25s;
+    }
+    .ba-tab:hover { border-color: var(--sage); color: #fff; }
+    .ba-tab.active { background: var(--sage); border-color: var(--sage); color: var(--ink); }
+    .ba-tab:focus-visible { outline: 2px solid var(--sage); outline-offset: 2px; }
+    .ba-hint { margin-top: 1.4rem; font-size: .85rem; color: #9aa28e; }
+    .ba-hint b { color: var(--sage); }
+    .ba-slider { position: relative; aspect-ratio: 3/4; max-height: 620px; overflow: hidden; border-radius: 16px; user-select: none; --pos: 50%; touch-action: pan-y; }
+    .ba-slider img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+    .ba-before { clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+    .ba-divider { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 3px; margin-left: -1.5px; background: #fff; pointer-events: none; }
+    .ba-grip { position: absolute; top: 50%; left: var(--pos); transform: translate(-50%,-50%); width: 50px; height: 50px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 18px rgba(0,0,0,.4); pointer-events: none; }
+    .ba-grip svg { width: 24px; height: 24px; fill: var(--moss-2); }
+    .ba-label { position: absolute; top: 14px; font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: .32rem .7rem; border-radius: 999px; pointer-events: none; }
+    .ba-label-v { left: 14px; background: rgba(20,28,22,.8); color: #fff; }
+    .ba-label-n { right: 14px; background: var(--sage); color: var(--ink); }
+    .ba-range { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0; touch-action: pan-y; }
+
+    /* ══════════ SO LÄUFT'S AB — echter 3-Schritt-Ablauf ══════════ */
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.2rem, 3vw, 2.4rem); }
+    @media (max-width: 780px) { .steps { grid-template-columns: 1fr; gap: 1.6rem; } }
+    .step { position: relative; }
+    .step-n { font-family: 'Fraunces', serif; font-weight: 600; font-size: 2.4rem; color: var(--clay); line-height: 1; }
+    .step h3 { margin-top: .6rem; font-size: 1.3rem; }
+    .step p { margin-top: .5rem; color: var(--ink-soft); font-size: .95rem; }
+    .step::after { content: ''; position: absolute; top: 1.1rem; right: -1.2rem; width: 2.4rem; height: 2px; background: var(--line); }
+    .step:last-child::after { display: none; }
+    @media (max-width: 780px) { .step::after { display: none; } }
+
+    /* ══════════ ABO ══════════ */
+    .band-moss { background: var(--moss-2); color: #eef2e5; overflow: hidden; }
+    .abo-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0,7fr) minmax(0,5fr); gap: clamp(2rem,5vw,4rem); align-items: center; }
+    @media (max-width: 860px) { .abo-grid { grid-template-columns: 1fr; } }
+    .band-moss .eyebrow { color: #c7d6ac; }
+    .band-moss .eyebrow::before { background: #d6a06a; }
+    .band-moss h2 { font-size: clamp(2rem,4.6vw,3rem); }
+    .band-moss h2 em { font-style: italic; color: #cfe0b0; }
+    .band-moss > .wrap > .abo-grid > div > p { color: #cfd8c2; margin-top: 1rem; max-width: 34rem; }
+    .abo-card { background: rgba(255,255,255,.07); border: 1.5px solid rgba(255,255,255,.2); border-radius: 16px; padding: clamp(1.6rem,3.5vw,2.2rem); }
+    .abo-card ul { list-style: none; }
+    .abo-card li { display: flex; gap: .7rem; padding: .5rem 0; font-size: .95rem; color: #eaf1df; }
+    .abo-card li svg { width: 20px; height: 20px; flex: none; stroke: #d6a06a; fill: none; stroke-width: 2; margin-top: .15rem; }
+    .abo-card .btn { margin-top: 1.3rem; width: 100%; justify-content: center; }
+
+    /* ══════════ EINSATZGEBIET ══════════ */
+    .area-grid { display: grid; grid-template-columns: minmax(0,6fr) minmax(0,5fr); gap: clamp(2rem,5vw,4rem); align-items: center; }
+    @media (max-width: 860px) { .area-grid { grid-template-columns: 1fr; } }
+    .towns { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
+    .towns span { font-size: .82rem; font-weight: 500; padding: .38rem .85rem; background: var(--card); color: var(--moss-2); border: 1px solid var(--line); border-radius: 999px; }
+    .map-svg { width: 100%; height: auto; }
+
+    /* ══════════ GALERIE ══════════ */
+    .gal { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: clamp(120px, 15vw, 190px); gap: 10px; }
+    .gal figure { margin: 0; overflow: hidden; border-radius: 12px; }
+    .gal img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+    .gal figure:hover img { transform: scale(1.06); }
+    .gal .w2 { grid-column: span 2; }
+    .gal .h2 { grid-row: span 2; }
+    @media (max-width: 720px) { .gal { grid-template-columns: repeat(2, 1fr); } .gal .w2 { grid-column: span 2; } }
+
+    /* ══════════ FAQ ══════════ */
+    .faq { max-width: 46rem; margin: 0 auto; border-top: 1px solid var(--line); }
+    .faq-item { border-bottom: 1px solid var(--line); }
+    .faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: none; border: none; text-align: left; padding: 1.25rem 0; }
+    .faq-q span { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.15rem; color: var(--ink); }
+    .faq-ic { flex: none; width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--moss); display: flex; align-items: center; justify-content: center; color: var(--moss); font-size: 1.1rem; font-weight: 700; transition: transform .3s ease, background .25s, color .25s; }
+    .faq-ic::before { content: '+'; }
+    .faq-q[aria-expanded="true"] .faq-ic { background: var(--moss); color: #fff; transform: rotate(45deg); }
+    .faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s ease; }
+    .faq-q[aria-expanded="true"] + .faq-a { grid-template-rows: 1fr; }
+    .faq-a-inner { overflow: hidden; }
+    .faq-a p { padding-bottom: 1.25rem; color: var(--ink-soft); }
+
+    /* ══════════ KONTAKT ══════════ */
+    .contact { background: var(--paper-2); }
+    .contact-grid { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,6fr); gap: clamp(2.5rem,6vw,5rem); }
+    @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
+    .contact-tel { font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(1.6rem,4vw,2.6rem); display: inline-block; margin: .6rem 0 .2rem; border-bottom: 3px solid var(--clay); }
+    .contact-tel:hover { color: var(--moss); }
+    .contact-methods { display: flex; flex-direction: column; gap: .5rem; margin-top: 1.4rem; }
+    .contact-methods a { display: inline-flex; align-items: center; gap: .6rem; font-weight: 500; color: var(--ink-soft); }
+    .contact-methods a:hover { color: var(--moss); }
+    .contact-methods svg { width: 18px; height: 18px; fill: var(--moss); flex: none; }
+    .contact-promise { margin-top: 1.6rem; padding: 1rem 1.2rem; background: var(--card); border-left: 3px solid var(--moss); border-radius: 0 10px 10px 0; font-size: .92rem; color: var(--ink-soft); }
+    form label { display: block; font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin: 1rem 0 .35rem; color: var(--ink-soft); }
+    form input, form textarea, form select { width: 100%; font: inherit; font-size: .95rem; padding: .8rem .95rem; background: var(--card); border: 1.5px solid var(--line); border-radius: 10px; color: var(--ink); transition: border-color .2s; }
+    form input:focus, form textarea:focus, form select:focus { outline: none; border-color: var(--moss); }
+    form textarea { resize: vertical; min-height: 110px; }
+    .form-hint { font-size: .8rem; color: var(--mute); margin-top: .7rem; }
+    form .btn { margin-top: 1.2rem; }
+
+    /* ══════════ FOOTER ══════════ */
+    footer { background: var(--ink); color: #b7bfae; padding: clamp(2.5rem,6vw,3.5rem) 0 6.5rem; font-size: .9rem; }
+    .foot-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; }
+    .foot-brand { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.1rem; color: #fff; }
+    .foot-brand small { display: block; font-family: 'Work Sans', sans-serif; font-weight: 400; font-size: .85rem; color: #8f9784; margin-top: .3rem; }
+    footer a:hover { color: #fff; }
+    .foot-legal { display: flex; gap: 1.4rem; }
+    .foot-copy { margin-top: 2rem; padding-top: 1.3rem; border-top: 1px solid #33392f; color: #767c6c; font-size: .8rem; }
+
+    /* ══════════ STICKY CALL-BAR (mobil) ══════════ */
+    .call-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 950; display: none; gap: .6rem; }
+    .call-bar a { flex: 1; display: flex; align-items: center; justify-content: center; gap: .5rem; padding: 1rem; font-weight: 700; letter-spacing: .02em; }
+    .call-bar .cb-call { background: var(--clay); color: #fff; }
+    .call-bar .cb-wa { background: var(--moss); color: #fff; }
+    .call-bar svg { width: 18px; height: 18px; fill: currentColor; }
+    @media (max-width: 720px) { .call-bar { display: flex; } }
+
+    /* ══════════ MITLAUFENDER WHATSAPP-BUTTON (Desktop/Tablet) ══════════ */
+    /* Nur ab 721px: darunter deckt die Sticky-Call-Bar den WhatsApp-Kontakt bereits ab. */
+    .wa-float {
+      position: fixed; right: 1.4rem; bottom: 1.4rem; z-index: 950;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: var(--moss); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 24px rgba(27,36,28,.28);
+      transition: transform .2s ease, background .2s ease;
+    }
+    .wa-float:hover { background: var(--moss-2); transform: translateY(-2px); }
+    .wa-float svg { width: 28px; height: 28px; fill: currentColor; }
+    @media (max-width: 720px) { .wa-float { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .wa-float:hover { transform: none; } }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════ HEADER ═══════════ -->
+  <header id="header">
+    <a class="brand" href="#top">
+      <img src="images/logo.jpg" alt="Logo Service & Dienstleistungen Graf" />
+      <b>Service &amp; Dienstleistungen<br />Graf</b>
+    </a>
+    <nav class="main">
+      <a class="navlink" href="#leistungen">Leistungen</a>
+      <a class="navlink" href="#beweis">Vorher / Nachher</a>
+      <a class="navlink" href="#ablauf">So läuft's ab</a>
+      <a class="navlink" href="#abo">Pflege-Abo</a>
+      <a class="navlink" href="#faq">Fragen</a>
+      <a class="nav-call" href="tel:+4915129870523">
+        <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+        0151 29870523
+      </a>
+    </nav>
+  </header>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <div class="hero" id="top">
+    <div class="wrap">
+      <div class="hero-inner">
+        <span class="eyebrow reveal">Gartenpflege &amp; Hausmeisterservice · Eslohe im Sauerland</span>
+        <h1 class="reveal">Vom Wildwuchs zum <span class="hl">Wohlfühlgarten</span>.</h1>
+        <p class="hero-lead reveal">
+          Ich mache aus verwilderten Flächen wieder gepflegte Grundstücke — und halte sie so.
+          <b>Zuverlässig, mit eigenem Gerät, im Umkreis von 50&nbsp;km um Eslohe.</b>
+        </p>
+        <div class="hero-cta reveal">
+          <a class="btn btn-clay" href="tel:+4915129870523">
+            <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+            Jetzt anrufen
+          </a>
+          <a class="btn btn-ghost" href="#kontakt">Kostenlose Einschätzung</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ TRUST-KACHEL (ragt ins Foto) ═══════════ -->
+  <div class="trust-tile">
+    <div class="wrap">
+      <div class="trust-row">
+        <div class="trust-item reveal">
+          <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><b>Kostenlose Einschätzung</b><span>Vor Ort, unverbindlich</span></div>
+        </div>
+        <div class="trust-item reveal">
+          <svg viewBox="0 0 24 24"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><b>Eigenes Gerät</b><span>Maschinen &amp; Anhänger</span></div>
+        </div>
+        <div class="trust-item reveal">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7-5-7-11a7 7 0 0 1 14 0c0 6-7 11-7 11z" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <div><b>50 km um Eslohe</b><span>Im ganzen Sauerland</span></div>
+        </div>
+        <div class="trust-item reveal">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke-linecap="round"/></svg>
+          <div><b>Fester Ansprechpartner</b><span>Direkt bei Yannik Graf</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ LEISTUNGEN ═══════════ -->
+  <section id="leistungen">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Leistungen</span>
+        <h2>Alles rund um Garten, Grundstück und Objekt.</h2>
+        <p>Ein Ansprechpartner für die ganze Außenanlage — von der einmaligen Rettung bis zur laufenden Betreuung.</p>
+      </div>
+      <div class="svc-grid">
+        <article class="svc reveal">
+          <div class="svc-img"><img src="images/galerie-rasen.jpg" alt="Frisch gemähter Rasen unter Obstbäumen" loading="lazy" /></div>
+          <div class="svc-body"><h3>Grün- &amp; Rasenpflege</h3><p>Rasen mähen, Grünflächen in Form halten — kleine und große Flächen, regelmäßig oder einmalig.</p></div>
+        </article>
+        <article class="svc reveal">
+          <div class="svc-img"><img src="images/galerie-bewuchs.jpg" alt="Baum- und Heckenschnitt" loading="lazy" /></div>
+          <div class="svc-body"><h3>Baum- &amp; Heckenschnitt</h3><p>Fachgerechter Schnitt von Bäumen und Hecken — inklusive Häckseln und Abtransport des Schnittguts.</p></div>
+        </article>
+        <article class="svc reveal">
+          <div class="svc-img"><img src="images/galerie-grundstueck.jpg" alt="Freigeschnittenes Grundstück" loading="lazy" /></div>
+          <div class="svc-body"><h3>Freischnitt von Grundstücken</h3><p>Verwilderte Bau- und Wiesengrundstücke werden wieder nutzbar gemacht — komplett mit Entsorgung. Meine Spezialität.</p></div>
+        </article>
+        <article class="svc reveal">
+          <div class="svc-img"><img src="images/galerie-obstwiese.jpg" alt="Gemähte Obstwiese" loading="lazy" /></div>
+          <div class="svc-body"><h3>Saisonale Gartenpflege</h3><p>Laubentfernung im Herbst, Häckseln und Abtransport von Grünschnitt — alles zur richtigen Zeit im Jahr.</p></div>
+        </article>
+        <article class="svc reveal">
+          <div class="svc-img"><img src="images/galerie-pflaster.jpg" alt="Gereinigte Pflasterfläche" loading="lazy" /></div>
+          <div class="svc-body"><h3>Hausmeisterservice</h3><p>Kehr- und Reinigungsarbeiten, Winterdienst, Objektbetreuung, Mülltonnendienst, Instandhaltungen und Kontrollgänge.</p></div>
+        </article>
+        <article class="svc reveal">
+          <div class="svc-img"><img src="images/galerie-hangweg.jpg" alt="Gepflegter Hauszugang" loading="lazy" /></div>
+          <div class="svc-body"><h3>Maschinenvermietung</h3><p>Bautrockner, Häcksler und mehr — leihen statt kaufen, mit kurzer Absprache und fairen Konditionen.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ VORHER / NACHHER ═══════════ -->
+  <section class="band-ink" id="beweis">
+    <div class="wrap">
+      <div class="ba-grid">
+        <div>
+          <span class="eyebrow reveal">Der Beweis</span>
+          <div class="sec-head reveal" style="margin-bottom:0;">
+            <h2 style="color:#fdfbf4;">Reden kann jeder.<br />Ziehen Sie selbst.</h2>
+            <p>Echte Aufträge aus der Region — Regler über das Bild schieben und die Verwandlung sehen.</p>
+          </div>
+          <div class="ba-tabs reveal" role="tablist">
+            <button class="ba-tab active" data-pair="weg" type="button">Hauszugang</button>
+            <button class="ba-tab" data-pair="wiese" type="button">Freischnitt Wiese</button>
+            <button class="ba-tab" data-pair="obstwiese" type="button">Obstwiese</button>
+          </div>
+          <p class="ba-hint reveal"><b>Tipp:</b> Griff nach links und rechts ziehen.</p>
+        </div>
+        <div class="reveal">
+          <div class="ba-slider" id="baSlider">
+            <img class="ba-after" id="baAfter" src="images/slider-weg-nachher.jpg" alt="Nachher: freigeschnittener Hauszugang" />
+            <img class="ba-before" id="baBefore" src="images/slider-weg-vorher.jpg" alt="Vorher: zugewachsener Hauszugang" />
+            <div class="ba-divider"></div>
+            <div class="ba-grip">
+              <svg viewBox="0 0 24 24"><path d="M9 7l-4 5 4 5M15 7l4 5-4 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="ba-label ba-label-v">Vorher</span>
+            <span class="ba-label ba-label-n">Nachher</span>
+            <input class="ba-range" id="baRange" type="range" min="0" max="100" value="50" aria-label="Vorher-Nachher-Vergleich verschieben" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SO LÄUFT'S AB ═══════════ -->
+  <section id="ablauf">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">So läuft's ab</span>
+        <h2>In drei Schritten zum gepflegten Grundstück.</h2>
+        <p>Keine Warteschleife, keine versteckten Kosten — Sie wissen von Anfang an, woran Sie sind.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-n">01</div>
+          <h3>Anrufen oder Formular</h3>
+          <p>Kurz schildern, worum es geht — am besten mit ungefährer Größe der Fläche und was zu tun ist.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-n">02</div>
+          <h3>Kostenloser Termin vor Ort</h3>
+          <p>Ich schaue mir Ihr Grundstück an, bespreche mit Ihnen die Möglichkeiten und mache ein Festpreis-Angebot.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-n">03</div>
+          <h3>Umsetzung &amp; Sauberkeit</h3>
+          <p>Ich packe an, häcksle und transportiere ab — und hinterlasse die Fläche so, wie Sie sie sich vorstellen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ABO ═══════════ -->
+  <section class="band-moss" id="abo">
+    <svg class="contours" viewBox="0 0 1200 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path d="M-50 120 C 250 40, 500 200, 750 110 S 1150 60, 1300 150" stroke="#c7d6ac" opacity="0.18"/>
+      <path d="M-50 200 C 250 120, 520 280, 780 190 S 1150 140, 1300 230" stroke="#c7d6ac" opacity="0.15"/>
+      <path d="M-50 300 C 250 220, 520 380, 780 290 S 1150 240, 1300 330" stroke="#c7d6ac" opacity="0.12"/>
+      <path d="M-50 400 C 250 320, 520 470, 780 390 S 1150 340, 1300 430" stroke="#c7d6ac" opacity="0.10"/>
+    </svg>
+    <div class="wrap">
+      <div class="abo-grid">
+        <div>
+          <span class="eyebrow reveal">Das Sorglos-Paket</span>
+          <h2 class="reveal">Das Haus-&amp;-Hof-Abo: <em>einmal beauftragen, immer gepflegt.</em></h2>
+          <p class="reveal">Rasen, Hecken, Grünschnitt, kleine Instandhaltungen: Ich komme in festen Abständen und sorge dafür, dass Ihr Garten und Grundstück dauerhaft im gleichen gepflegten Zustand bleiben — ohne dass Sie jedes Mal neu anrufen müssen.</p>
+        </div>
+        <div class="abo-card reveal">
+          <ul>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Feste Termine nach Absprache — monatlich, im Quartal oder saisonal</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Rasen mähen, Hecken schneiden, Grünflächen in Form halten</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Grünschnitt wird direkt gehäckselt und abtransportiert</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Auf Wunsch mit Winterdienst und Kontrollgängen</li>
+            <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Jederzeit anpassbar oder kündbar</li>
+          </ul>
+          <a class="btn btn-clay" href="tel:+4915129870523">
+            <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+            Abo anfragen
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ EINSATZGEBIET ═══════════ -->
+  <section id="gebiet">
+    <div class="wrap">
+      <div class="area-grid">
+        <div>
+          <span class="eyebrow reveal">Einsatzgebiet</span>
+          <div class="sec-head reveal" style="margin-bottom:0;">
+            <h2>50 km rund um Eslohe.</h2>
+            <p>Ob Meschede, Sundern, Schmallenberg oder Arnsberg — ich bin im ganzen Sauerland unterwegs. Liegt Ihr Grundstück etwas weiter draußen? Einfach anrufen, die Anfahrt klären wir unkompliziert.</p>
+          </div>
+          <div class="towns reveal">
+            <span>Eslohe</span><span>Meschede</span><span>Sundern</span><span>Schmallenberg</span><span>Lennestadt</span><span>Arnsberg</span><span>Olpe</span><span>Winterberg</span><span>Brilon</span>
+          </div>
+        </div>
+        <div class="reveal">
+          <svg class="map-svg" viewBox="0 0 460 420" role="img" aria-label="Karte: 50-Kilometer-Radius um Eslohe">
+            <circle cx="230" cy="210" r="180" fill="none" stroke="#4a5d3a" stroke-width="2.5" stroke-dasharray="7 8"/>
+            <circle cx="230" cy="210" r="120" fill="none" stroke="#d5cdba" stroke-width="1.5" stroke-dasharray="4 7"/>
+            <circle cx="230" cy="210" r="60" fill="none" stroke="#d5cdba" stroke-width="1.5" stroke-dasharray="4 7"/>
+            <circle cx="230" cy="210" r="9" fill="#b3703a"/>
+            <circle cx="230" cy="210" r="17" fill="none" stroke="#4a5d3a" stroke-width="2"/>
+            <text x="230" y="248" text-anchor="middle" font-family="Fraunces, serif" font-weight="700" font-size="16" fill="#1b241c">ESLOHE</text>
+            <g font-family="Work Sans, sans-serif" font-size="12.5" font-weight="600" fill="#4b5546">
+              <circle cx="278" cy="152" r="5" fill="#4a5d3a"/><text x="290" y="148">Meschede</text>
+              <circle cx="150" cy="158" r="5" fill="#4a5d3a"/><text x="60" y="152">Sundern</text>
+              <circle cx="128" cy="102" r="5" fill="#4a5d3a"/><text x="42" y="96">Arnsberg</text>
+              <circle cx="300" cy="286" r="5" fill="#4a5d3a"/><text x="312" y="292">Schmallenberg</text>
+              <circle cx="196" cy="308" r="5" fill="#4a5d3a"/><text x="102" y="316">Lennestadt</text>
+              <circle cx="118" cy="330" r="5" fill="#4a5d3a"/><text x="72" y="356">Olpe</text>
+              <circle cx="368" cy="238" r="5" fill="#4a5d3a"/><text x="352" y="264">Winterberg</text>
+              <circle cx="352" cy="98" r="5" fill="#4a5d3a"/><text x="364" y="92">Brilon</text>
+            </g>
+            <text x="398" y="196" font-family="Work Sans, sans-serif" font-size="12" font-weight="700" fill="#4a5d3a">50 km</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ GALERIE ═══════════ -->
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Einblicke</span>
+        <h2>Aus der Arbeit.</h2>
+      </div>
+      <div class="gal reveal">
+        <figure class="w2 h2"><img src="images/galerie-uferwiese.jpg" alt="Gepflegte Uferwiese am See" loading="lazy" /></figure>
+        <figure><img src="images/galerie-freischnitt.jpg" alt="Frisch freigeschnittene Wiese" loading="lazy" /></figure>
+        <figure><img src="images/galerie-obstwiese.jpg" alt="Gemähte Obstwiese" loading="lazy" /></figure>
+        <figure><img src="images/galerie-feld-1.jpg" alt="Gepflegte Fläche" loading="lazy" /></figure>
+        <figure><img src="images/galerie-feld-2.jpg" alt="Gepflegte Fläche am Wasser" loading="lazy" /></figure>
+        <figure class="w2"><img src="images/galerie-hangweg.jpg" alt="Freigeschnittener Hauszugang mit Pflasterweg" loading="lazy" /></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FAQ ═══════════ -->
+  <section id="faq" style="padding-top:0;">
+    <div class="wrap">
+      <div class="sec-head reveal" style="margin-left:auto;margin-right:auto;text-align:center;">
+        <span class="eyebrow" style="justify-content:center;">Häufige Fragen</span>
+        <h2>Gut zu wissen.</h2>
+      </div>
+      <div class="faq" id="faqList">
+        <div class="faq-item reveal">
+          <button class="faq-q" type="button" aria-expanded="true" aria-controls="fa1"><span>Was kostet die Einschätzung?</span><span class="faq-ic"></span></button>
+          <div class="faq-a" id="fa1"><div class="faq-a-inner"><p>Nichts. Ich komme vorbei, schaue mir die Fläche an und mache Ihnen ein unverbindliches Festpreis-Angebot — die Vor-Ort-Einschätzung ist kostenlos.</p></div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" type="button" aria-expanded="false" aria-controls="fa2"><span>Bis wohin fahren Sie?</span><span class="faq-ic"></span></button>
+          <div class="faq-a" id="fa2"><div class="faq-a-inner"><p>Grundsätzlich im Umkreis von rund 50&nbsp;km um Eslohe — also im ganzen Sauerland. Liegt Ihr Grundstück etwas weiter draußen, klären wir die Anfahrt einfach kurz am Telefon.</p></div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" type="button" aria-expanded="false" aria-controls="fa3"><span>Übernehmen Sie auch die Entsorgung?</span><span class="faq-ic"></span></button>
+          <div class="faq-a" id="fa3"><div class="faq-a-inner"><p>Ja. Grünschnitt wird direkt gehäckselt und abtransportiert — Sie müssen sich um nichts kümmern und brauchen keinen Container.</p></div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" type="button" aria-expanded="false" aria-controls="fa4"><span>Machen Sie auch einmalige Aufträge?</span><span class="faq-ic"></span></button>
+          <div class="faq-a" id="fa4"><div class="faq-a-inner"><p>Klar. Ob einmaliger Freischnitt eines verwilderten Grundstücks oder laufende Betreuung im Pflege-Abo — beides ist möglich, ganz nach Ihrem Bedarf.</p></div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" type="button" aria-expanded="false" aria-controls="fa5"><span>Wie schnell melden Sie sich zurück?</span><span class="faq-ic"></span></button>
+          <div class="faq-a" id="fa5"><div class="faq-a-inner"><p>In der Regel innerhalb eines Werktags. Am schnellsten geht's telefonisch oder per WhatsApp.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ KONTAKT ═══════════ -->
+  <section class="contact" id="kontakt">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div>
+          <span class="eyebrow reveal">Kontakt</span>
+          <div class="sec-head reveal" style="margin-bottom:0;">
+            <h2>Kostenlose Einschätzung vor Ort.</h2>
+          </div>
+          <p class="reveal" style="margin-top:1rem;color:var(--ink-soft);max-width:30rem;">Kein Callcenter, keine Warteschleife — Sie sprechen direkt mit mir, Yannik Graf.</p>
+          <div class="reveal">
+            <a class="contact-tel" href="tel:+4915129870523">0151&nbsp;29870523</a>
+            <div class="contact-methods">
+              <a href="https://wa.me/4915129870523">
+                <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.6.8 2 .9 2.1.1.1.1.3 0 .5-.1.2-.2.4-.3.5l-.4.5c-.1.1-.3.3-.1.5.1.3.6 1 1.4 1.7 1 .8 1.7 1.1 2 1.2.2.1.4.1.5-.1.1-.2.6-.7.8-.9.2-.3.4-.2.6-.1.2.1 1.5.7 1.7.9.3.1.4.2.5.3.1.2.1.6-.1 1.1z"/></svg>
+                WhatsApp: 0151 29870523
+              </a>
+              <a href="mailto:info@dienstleistungengraf.de">
+                <svg viewBox="0 0 24 24"><path d="M3 5h18v14H3V5zm2 2v.5l7 4.5 7-4.5V7H5zm14 3-7 4.5L5 10v7h14v-7z"/></svg>
+                info@dienstleistungengraf.de
+              </a>
+            </div>
+          </div>
+          <p class="contact-promise reveal"><b>Rückmeldung in der Regel innerhalb eines Werktags.</b><br />Service &amp; Dienstleistungen Graf · Yannik Graf · 59889 Eslohe</p>
+        </div>
+        <div class="reveal">
+          <form id="contactForm">
+            <label for="f-name">Ihr Name</label>
+            <input id="f-name" name="name" type="text" required autocomplete="name" />
+            <label for="f-ort">Ort des Grundstücks</label>
+            <input id="f-ort" name="ort" type="text" required placeholder="z. B. Eslohe" />
+            <label for="f-tel">Telefon (für Rückruf)</label>
+            <input id="f-tel" name="telefon" type="tel" autocomplete="tel" />
+            <label for="f-leistung">Worum geht es?</label>
+            <select id="f-leistung" name="leistung">
+              <option>Grün- &amp; Rasenpflege</option>
+              <option>Baum- &amp; Heckenschnitt</option>
+              <option>Freischnitt eines Grundstücks</option>
+              <option>Hausmeisterservice</option>
+              <option>Haus-&amp;-Hof-Pflege-Abo</option>
+              <option>Etwas anderes</option>
+            </select>
+            <label for="f-msg">Kurze Beschreibung</label>
+            <textarea id="f-msg" name="nachricht" required placeholder="z. B. Verwildertes Grundstück, ca. 800 m², soll freigeschnitten werden …"></textarea>
+            <button class="btn btn-moss" type="submit">Anfrage senden</button>
+            <p class="form-hint">Öffnet Ihr E-Mail-Programm mit fertiger Nachricht — oder rufen Sie einfach direkt an.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">Service &amp; Dienstleistungen Graf<small>Gartenpflege &amp; Hausmeisterservice · 59889 Eslohe</small></div>
+        <div>
+          <a href="tel:+4915129870523">0151 29870523</a><br />
+          <a href="mailto:info@dienstleistungengraf.de">info@dienstleistungengraf.de</a>
+        </div>
+        <div class="foot-legal">
+          <a href="impressum.html">Impressum</a>
+          <a href="datenschutz.html">Datenschutz</a>
+        </div>
+      </div>
+      <p class="foot-copy">© <span id="year">2026</span> Service &amp; Dienstleistungen Graf, Eslohe. Alle Rechte vorbehalten.</p>
+    </div>
+  </footer>
+
+  <!-- ═══════════ STICKY CALL-BAR (Handy) ═══════════ -->
+  <div class="call-bar">
+    <a class="cb-call" href="tel:+4915129870523"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>Anrufen</a>
+    <a class="cb-wa" href="https://wa.me/4915129870523"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.6.8 2 .9 2.1.1.1.1.3 0 .5-.3.6-.6.8-.4.5-.1.5.1.3.6 1 1.4 1.7 1 .8 1.7 1.1 2 1.2.2.1.4.1.5-.1.1-.2.6-.7.8-.9.2-.3.4-.2.6-.1.2.1 1.5.7 1.7.9.3.1.4.2.5.3.1.2.1.6-.1 1.1z"/></svg>WhatsApp</a>
+  </div>
+
+  <!-- ═══════════ MITLAUFENDER WHATSAPP-BUTTON (Desktop/Tablet) ═══════════ -->
+  <a class="wa-float" href="https://wa.me/4915129870523" aria-label="Per WhatsApp schreiben" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.6.8 2 .9 2.1.1.1.1.3 0 .5-.3.6-.6.8-.4.5-.1.5.1.3.6 1 1.4 1.7 1 .8 1.7 1.1 2 1.2.2.1.4.1.5-.1.1-.2.6-.7.8-.9.2-.3.4-.2.6-.1.2.1 1.5.7 1.7.9.3.1.4.2.5.3.1.2.1.6-.1 1.1z"/></svg>
+  </a>
+
+  <script>
+    // Header-Zustand
+    const header = document.getElementById('header');
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Reveal
+    const io = new IntersectionObserver((es) => {
+      es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Vorher/Nachher-Slider
+    const slider = document.getElementById('baSlider');
+    const range  = document.getElementById('baRange');
+    const imgV   = document.getElementById('baBefore');
+    const imgN   = document.getElementById('baAfter');
+    range.addEventListener('input', () => slider.style.setProperty('--pos', range.value + '%'));
+    const pairs = {
+      wiese:     { v:'images/slider-wiese-vorher.jpg',     n:'images/slider-wiese-nachher.jpg',     alt:'Wiese' },
+      weg:       { v:'images/slider-weg-vorher.jpg',       n:'images/slider-weg-nachher.jpg',       alt:'Hauszugang' },
+      obstwiese: { v:'images/slider-obstwiese-vorher.jpg', n:'images/slider-obstwiese-nachher.jpg', alt:'Obstwiese' }
+    };
+    document.querySelectorAll('.ba-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.ba-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const p = pairs[btn.dataset.pair];
+        imgV.src = p.v; imgV.alt = 'Vorher: ' + p.alt;
+        imgN.src = p.n; imgN.alt = 'Nachher: ' + p.alt;
+        range.value = 50; slider.style.setProperty('--pos', '50%');
+      });
+    });
+
+    // FAQ
+    document.querySelectorAll('#faqList .faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!open));
+      });
+    });
+
+    // Kontaktformular → E-Mail
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const f = e.target;
+      const subject = encodeURIComponent('Anfrage über die Website — ' + f.name.value);
+      const body = encodeURIComponent(
+        'Name: ' + f.name.value + '\n' +
+        'Ort des Grundstücks: ' + f.ort.value + '\n' +
+        'Telefon: ' + (f.telefon.value || '—') + '\n' +
+        'Leistung: ' + f.leistung.value + '\n\n' +
+        f.nachricht.value
+      );
+      window.location.href = 'mailto:info@dienstleistungengraf.de?subject=' + subject + '&body=' + body;
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
