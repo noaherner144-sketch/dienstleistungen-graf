@@ -1,0 +1,53 @@
+═══════════════════════════════════════════════════════════════════════════════
+  WEBSITE LIVE SCHALTEN — Anleitung für Yannik Graf
+═══════════════════════════════════════════════════════════════════════════════
+
+Hallo Yannik,
+
+deine Website ist fertig! Um sie unter deiner Domain dienstleistunggraf.de
+erreichbar zu machen, musst du zwei DNS-Einträge bei IONOS eintragen.
+
+Das dauert ca. 5 Minuten. Hier die Schritte:
+
+───────────────────────────────────────────────────────────────────────────────
+SCHRITT 1: IONOS-Kundencenter öffnen
+───────────────────────────────────────────────────────────────────────────────
+
+1. Gehe zu https://www.ionos.de/ und melde dich an (mit deinem Passwort)
+2. Gehe zu "Meine Dienste" oder "Domains" (oben im Menü)
+3. Suche "dienstleistunggraf.de" in der Liste und klicke drauf
+
+───────────────────────────────────────────────────────────────────────────────
+SCHRITT 2: Nameserver ändern
+───────────────────────────────────────────────────────────────────────────────
+
+4. Suche nach "Nameserver" oder "DNS-Einstellungen" (sollte auf der Domain-Seite sein)
+5. Klick auf "Nameserver bearbeiten" oder "DNS ändern"
+6. Es wird dir angeboten, die Nameserver zu ändern. Wähle: "Cloudflare Nameserver"
+   (oder: "Andere Nameserver")
+
+───────────────────────────────────────────────────────────────────────────────
+SCHRITT 3: Diese zwei Adressen eintragen
+───────────────────────────────────────────────────────────────────────────────
+
+7. Trage folgende zwei Nameserver ein (kopiere einfach):
+
+   ✓ ns1.cloudflare.com
+   ✓ ns2.cloudflare.com
+
+8. Speichern / Bestätigen (Button ist meist grün)
+
+───────────────────────────────────────────────────────────────────────────────
+FERTIG! Das war's.
+───────────────────────────────────────────────────────────────────────────────
+
+⏱️  Die Änderung ist sofort gespeichert, aber die Website wird erst in
+   24–48 Stunden unter dienstleistunggraf.de erreichbar.
+   (In der Regel schneller, oft schon nach 1–2 Stunden)
+
+🔗 Bis dahin ist deine Website hier online:
+   https://dienstleistungen-graf.noah-erner144.workers.dev
+
+❓ Fragen? Schreib an: noah.erner144@gmail.com
+
+═══════════════════════════════════════════════════════════════════════════════
