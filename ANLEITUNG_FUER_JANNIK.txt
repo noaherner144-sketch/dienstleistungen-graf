@@ -1,8 +1,8 @@
 ═══════════════════════════════════════════════════════════════════════════════
-  WEBSITE LIVE SCHALTEN — Anleitung für Yannik Graf
+  WEBSITE LIVE SCHALTEN — Anleitung für Jannik Graf
 ═══════════════════════════════════════════════════════════════════════════════
 
-Hallo Yannik,
+Hallo Jannik,
 
 deine Website ist fertig! Um sie unter deiner Domain dienstleistunggraf.de
 erreichbar zu machen, musst du zwei DNS-Einträge bei IONOS eintragen.
