@@ -6,3 +6,4 @@ wrangler.jsonc
 .wrangler/**
 .env
 *.local
+ANLEITUNG_*.txt

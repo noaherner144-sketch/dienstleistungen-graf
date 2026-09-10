@@ -6,9 +6,15 @@
   <title>Datenschutzerklärung — Service &amp; Dienstleistungen Graf</title>
   <meta name="robots" content="noindex" />
   <link rel="icon" href="images/logo.jpg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Schriften lokal ausgeliefert (kein Google-Fonts-Aufruf, keine IP-Übertragung an Google) -->
+  <style>
+    @font-face{font-family:'Archivo';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/archivo-400-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+    @font-face{font-family:'Archivo';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/archivo-400-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+    @font-face{font-family:'Archivo';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/archivo-700-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+    @font-face{font-family:'Archivo';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/archivo-700-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+    @font-face{font-family:'Archivo Black';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/archivo-black-400-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+    @font-face{font-family:'Archivo Black';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/archivo-black-400-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+  </style>
   <style>
     :root {
       --paper: #f2f2ee; --ink: #171a17; --ink-soft: #45493f;
@@ -74,7 +80,7 @@
     </p>
     <p>
       Diese Website wird gehostet bei: Cloudflare, Inc., 101 Townsend St,
-      San Francisco, CA 94107, USA (Cloudflare Pages). Die Datenübertragung
+      San Francisco, CA 94107, USA (Cloudflare Workers). Die Datenübertragung
       in die USA erfolgt auf Grundlage der EU-Standardvertragsklauseln.
       Weitere Informationen: <a href="https://www.cloudflare.com/privacypolicy/" rel="noopener">cloudflare.com/privacypolicy</a>.
     </p>
@@ -89,14 +95,12 @@
       einer vorbereiteten Nachricht.
     </p>
 
-    <h2>5. Externe Schriftarten (Google Fonts)</h2>
+    <h2>5. Schriftarten</h2>
     <p>
-      Diese Website bindet Schriftarten von Google Fonts ein. Beim Aufruf der
-      Seite stellt Ihr Browser dazu eine Verbindung zu Servern von Google her;
-      dabei wird Ihre IP-Adresse übermittelt. Rechtsgrundlage ist Art. 6
-      Abs. 1 lit. f DSGVO (einheitliche Darstellung der Website). Weitere
-      Informationen finden Sie in der Datenschutzerklärung von Google:
-      <a href="https://policies.google.com/privacy" rel="noopener">policies.google.com/privacy</a>.
+      Die auf dieser Website verwendeten Schriftarten werden ausschließlich vom
+      Server dieser Website ausgeliefert (lokale Einbindung). Es wird dabei
+      keine Verbindung zu Servern Dritter — insbesondere nicht zu Google Fonts —
+      aufgebaut, und es wird keine IP-Adresse an Dritte übermittelt.
     </p>
 
     <h2>6. Ihre Rechte</h2>
